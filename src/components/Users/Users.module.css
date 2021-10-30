@@ -1,0 +1,15 @@
+.avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 10px;
+}
+
+.name {
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+}
