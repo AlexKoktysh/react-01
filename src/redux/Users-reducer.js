@@ -1,19 +1,14 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 let initialState = {
-    usersPage: [
-    //     {id: '1', userName: 'Sasha', userStatus: 'My name is Sasha', 
-    //     userCountry: 'Belarus', userCity: 'Minsk', follow: true, 
-    //     userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE84xssgYl80Fen_wbkc33X01DCzGkXAxh6g&usqp=CAU'},
-    //     {id: '2', userName: 'Viktor', userStatus: 'My name is Viktor', 
-    //     userCountry: 'Russia', userCity: 'Moskow', follow: false, 
-    //     userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE84xssgYl80Fen_wbkc33X01DCzGkXAxh6g&usqp=CAU'},
-    //     {id: '3', userName: 'Igor', userStatus: 'My name is Igor', 
-    //     userCountry: 'Ukraine', userCity: 'Kiev', follow: true, 
-    //     userAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE84xssgYl80Fen_wbkc33X01DCzGkXAxh6g&usqp=CAU'}
-    ]
+    usersPage: [],
+    pageSize: 100,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -42,7 +37,17 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersPage: [...action.users]
-            }    
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.totalCount
+            } 
         default:
             return state;
     } 
@@ -66,6 +71,20 @@ export const setUsersActionCreator = (users) => {
     return {
         type: SET_USERS,
         users
+    }
+}
+
+export const setCurrentPageActionCreator = (currentPage) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        currentPage
+    }
+}
+
+export const setTotalUsersCountActionCreator = (totalCount) => {
+    return {
+        type: SET_TOTAL_USERS_COUNT,
+        totalCount
     }
 }
 

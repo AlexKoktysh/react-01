@@ -13,3 +13,17 @@
     display: grid;
     grid-template-rows: 1fr 3fr;
 }
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.page {
+    position: fixed;
+    display: inline-block;
+    border: 1px solid #ddd;
+}
+
+.users {
+    padding-top: 40px;
+}
