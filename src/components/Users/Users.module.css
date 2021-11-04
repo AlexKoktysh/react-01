@@ -20,8 +20,9 @@
 
 .page {
     position: fixed;
-    display: inline-block;
-    border: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    width: 785px;
 }
 
 .users {
