@@ -2,6 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, unFollowActionCreator, setTotalUsersCountActionCreator } from '../../redux/Users-reducer';
 import Users from './Users';
+import * as axios from 'axios';
+
+class UsersContainer extends React.Component {
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    onPageChange = (pageSize) => {
+        this.props.setCurrentPage(pageSize)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageSize}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            })
+    }
+    
+    render() {
+        return <Users props={this.props} onPageChange={this.onPageChange}/>
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -32,6 +53,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const UsersConteiner = connect(mapStateToProps, mapDispatchToProps)(Users)
-
-export default UsersConteiner;
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
