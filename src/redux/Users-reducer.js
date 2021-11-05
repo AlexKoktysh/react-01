@@ -60,42 +60,42 @@ const usersReducer = (state = initialState, action) => {
     } 
 }
 
-export const followActionCreator = (userId) => {
+export const follow = (userId) => {
     return {
         type: UNFOLLOW,
         userId
     }
 }
 
-export const unFollowActionCreator = (userId) => {
+export const unFollow = (userId) => {
     return {
         type: FOLLOW,
         userId
     }
 }
 
-export const setUsersActionCreator = (users) => {
+export const setUsers = (users) => {
     return {
         type: SET_USERS,
         users
     }
 }
 
-export const setCurrentPageActionCreator = (currentPage) => {
+export const setCurrentPage = (currentPage) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
     }
 }
 
-export const setTotalUsersCountActionCreator = (totalCount) => {
+export const setTotalUsersCount = (totalCount) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalCount
     }
 }
 
-export const toogleIsFetchingActionCreator = (isFetching) => {
+export const toogleIsFetching = (isFetching) => {
     return {
         type: TOOGLE_IS_FETCHING,
         isFetching

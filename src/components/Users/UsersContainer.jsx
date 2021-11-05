@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, unFollowActionCreator, setTotalUsersCountActionCreator, toogleIsFetchingActionCreator } from '../../redux/Users-reducer';
+import { follow, setCurrentPage, setUsers, unFollow, setTotalUsersCount, toogleIsFetching } from '../../redux/Users-reducer';
 import Users from './Users';
 import * as axios from 'axios';
 import Preloader from '../Common/Preloader/Preloader';
@@ -44,27 +44,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followActionCreator(userId))
-        },
-        unFollow: (userId) => {
-            dispatch(unFollowActionCreator(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersActionCreator(users))
-        },
-        setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageActionCreator(currentPage))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountActionCreator(totalCount))
-        },
-        toogleIsFetching: (isFetching) => {
-            dispatch(toogleIsFetchingActionCreator(isFetching))
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, 
+    {follow,
+    unFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toogleIsFetching})(UsersContainer)
