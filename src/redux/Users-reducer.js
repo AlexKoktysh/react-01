@@ -1,3 +1,5 @@
+import { userAPI } from "../API/api"
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -69,14 +71,14 @@ const usersReducer = (state = initialState, action) => {
     } 
 }
 
-export const follow = (userId) => {
+export const followAccess = (userId) => {
     return {
         type: UNFOLLOW,
         userId
     }
 }
 
-export const unFollow = (userId) => {
+export const unFollowAccess = (userId) => {
     return {
         type: FOLLOW,
         userId
@@ -116,6 +118,56 @@ export const toogleFollowingProgress = (isFetching, userId) => {
         type: TOOGLE_FOLLOWING_PROGRESS,
         isFetching,
         userId
+    }
+}
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toogleIsFetching(true))
+        userAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toogleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+            })
+    }
+}
+
+export const changePage = (pageNumber, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(pageNumber))
+        dispatch(toogleIsFetching(true))
+        userAPI.getUsers(pageNumber, pageSize)
+            .then(data => {
+                dispatch(toogleIsFetching(false))
+                dispatch(setUsers(data.items))
+            })
+    }
+}
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toogleFollowingProgress(true, userId))
+        userAPI.deleteFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followAccess(userId))
+                }
+                dispatch(toogleFollowingProgress(false, userId))
+            })
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toogleFollowingProgress(true, userId))
+        userAPI.postFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unFollowAccess(userId))
+                }
+                dispatch(toogleFollowingProgress(false, userId))
+            })
     }
 }
 

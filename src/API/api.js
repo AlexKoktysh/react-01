@@ -33,5 +33,21 @@ export const userAPI = {
                 return response.data
             })
         )
+    },
+    getMe() {
+        return (
+            instans.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+        )
+    },
+    getUserProfile(userId) {
+        return (
+            instans.get(`profile/${userId}`)
+            .then(response => {
+                return response.data
+            })
+        )
     }
 }
