@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { userAPI } from "../../API/api";
@@ -29,21 +28,29 @@ let Users = (props) => {
                                     : userPhoto} className={styles.avatar} />
                             </NavLink>
                             <div>
-                                {user.follow 
-                                ? <button onClick={() => {
-                                    userAPI.deleteFollow(user.id)
-                                        .then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.props.follow(user.id)
-                                            }
+                                {user.follow
+                                ? <button 
+                                disabled={props.props.followingIsProgress.some(id => id === user.id)} 
+                                    onClick={() => {
+                                        props.props.toogleFollowingProgress(true, user.id)
+                                        userAPI.deleteFollow(user.id)
+                                            .then(data => {
+                                                if (data.resultCode === 0) {
+                                                    props.props.follow(user.id)
+                                                }
+                                                props.props.toogleFollowingProgress(false, user.id)
                                             })
-                                }}>UnFollow</button> 
-                                : <button onClick={() => {
-                                    userAPI.postFollow(user.id)
-                                        .then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.props.unFollow(user.id)
-                                            }
+                                    }}>UnFollow</button> 
+                                : <button 
+                                disabled={props.props.followingIsProgress.some(id => id === user.id)}
+                                    onClick={() => {
+                                        props.props.toogleFollowingProgress(true, user.id)
+                                        userAPI.postFollow(user.id)
+                                            .then(data => {
+                                                if (data.resultCode === 0) {
+                                                    props.props.unFollow(user.id)
+                                                }
+                                                props.props.toogleFollowingProgress(false, user.id)
                                             })
                                     }}>Follow</button>}
                             </div>
