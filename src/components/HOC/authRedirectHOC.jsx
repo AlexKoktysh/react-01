@@ -1,12 +1,22 @@
 import React from 'react';
-import Login from '../Login/Login';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { compose } from 'redux';
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
 
 export const authRedirectHOC = (Component) => {
     class RedirectComponent extends React.Component {
         render() {
-            if (!this.props.isAuth) return <Login />
+            if (!this.props.isAuth) return <Redirect to='/login' />
             return <Component {...this.props} />
         }
     }
-    return RedirectComponent
+    return compose(
+        connect(mapStateToProps)
+    )(RedirectComponent)
 }

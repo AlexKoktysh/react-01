@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import Friends from './Friends'
 
 const mapStateToProps = (state) => {
@@ -14,6 +15,6 @@ const mapDispatchToProps = () => {
         }
 }
 
-const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends)
-
-export default FriendsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(Friends)

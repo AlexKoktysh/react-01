@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { getMe } from '../../redux/auth-reducer';
 import Header from './Header';
 
@@ -22,4 +23,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getMe})(HeaderContainer)
+export default compose(
+    connect(mapStateToProps, {getMe})
+)(HeaderContainer)
