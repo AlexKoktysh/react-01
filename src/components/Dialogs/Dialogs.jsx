@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from '../Login/Login';
 import Dialog from './Dialog/Dialog';
 import styles from './Dialogs.module.css';
 import Message from './Message/Message';
@@ -10,10 +11,14 @@ const Dialogs = (props) => {
     let addMessage = () => {
         props.addMessage()
     }
+
     let onMessageChange = () => {
         let textMessage = newMessage.current.value
         props.onMessageChange(textMessage)
     }
+
+    if (!props.isAuth) return <Login />
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItem}>
