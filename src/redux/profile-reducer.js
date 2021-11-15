@@ -10,7 +10,8 @@ let initialState = {
     {id: 1, message: 'I am from Belarus', likeCounts: '2'}
     ],
     onChangePost: 'it-kamasutra',
-    profile: null
+    profile: null,
+    status: 'Hello, World!'
 }
 
 const profileReducer = (state = initialState, action) => {
