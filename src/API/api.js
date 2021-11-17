@@ -49,5 +49,23 @@ export const userAPI = {
                 return response.data
             })
         )
+    },
+    getStatus(userId) {
+        return (
+            instans.get(`profile/status/${userId}`)
+            .then(response => {
+                return response.data
+            })
+        )
+    },
+    updateStatus(status) {
+        return (
+            instans.put(`profile/status`, {
+                status
+            })
+            .then(response => {
+                return response.data
+            })
+        )
     }
 }
