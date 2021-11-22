@@ -10,15 +10,6 @@ const MyPosts = (props) => {
     }
 
     let myPostsData = props.state.profilePage.postsData.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
-    
-    // let newPost = React.createRef()
-    // let addPost = () => {
-    //     props.addPost()
-    // }
-    // let onPostChange = () => {
-    //     let textPost = newPost.current.value
-    //     props.onPostChange(textPost)
-    // }
 
     return (
         <div className={styles.item}>

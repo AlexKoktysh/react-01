@@ -12,17 +12,6 @@ const Dialogs = (props) => {
         props.addMessage(dataForm.message)
         console.log(dataForm.message)
     }
-    
-    // let newMessage = React.createRef()
-    
-    // let addMessage = (value) => {
-    //     props.onMessageChange(value.message)
-    // }
-
-    // let onMessageChange = () => {
-    //     let textMessage = newMessage.current.value
-    //     props.onMessageChange(textMessage)
-    // }
 
     return (
         <div className={styles.dialogs}>
