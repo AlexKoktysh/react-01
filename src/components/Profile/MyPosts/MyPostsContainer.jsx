@@ -11,5 +11,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, { onPostChange, addPost })
+    connect(mapStateToProps, { 
+        // onPostChange
+        addPost })
 )(MyPosts)
