@@ -67,5 +67,21 @@ export const userAPI = {
                 return response.data
             })
         )
+    },
+    login(email, password, rememberMe) {
+        return (
+            instans.post(`auth/login`, {email, password, rememberMe})
+            .then(response => {
+                return response.data
+            })
+        )
+    },
+    logout() {
+        return (
+            instans.delete(`auth/login`)
+            .then(response => {
+                return response.data
+            })
+        )
     }
 }

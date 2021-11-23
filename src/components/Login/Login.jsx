@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
+import { login, logout } from '../../redux/auth-reducer';
 import { required } from '../../utils/validatros/validators';
 import { Input } from '../Common/FormControl/FormControl';
 
@@ -26,7 +29,11 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props) => {
     const onSubmit = (dataForm) => {
-        console.log(dataForm)
+        props.login(dataForm.login, dataForm.password, dataForm.rememberMe)
+    }
+    
+    if (props.isAuth) {
+        return <Redirect to={'/profile'} />
     }
     return (
         <div>
@@ -36,4 +43,8 @@ const Login = (props) => {
     )
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login, logout})(Login)
