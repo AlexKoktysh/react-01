@@ -29,16 +29,16 @@ export const setUserData = (id, email, login, isAuth) => {
     }
 }
 
-export const getMe = () => {
-    return (dispatch) => {
+export const getMe = () => (dispatch) => {
+    return (
         userAPI.getMe()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data
-                    dispatch(setUserData(id, email, login, true))
-                }
-                })
-    }
+        .then(data => {
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data
+                dispatch(setUserData(id, email, login, true))
+            }
+            })
+    )
 }
 
 export const login = (email, password, rememberMe) => {
