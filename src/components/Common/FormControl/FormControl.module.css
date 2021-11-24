@@ -8,3 +8,8 @@
 {
     color: rgb(73, 23, 23);
 }
+
+.formSummaryError {
+    color: rgb(73, 23, 23);
+    padding: 2px;
+}
