@@ -16,42 +16,42 @@ import { initializedApp } from './redux/app-reducer';
 
 class App extends React.Component {
   
-  componentDidMount() {
+componentDidMount() {
     this.props.initializedApp()
-  }
+    }
 
-  render() {
+render() {
     if (!this.props.initialized) {
-      return <Preloader />
+        return <Preloader />
     }
     return (
-      <BrowserRouter>
-        <div className='app-wrapper'>
-          <HeaderContainer />
-          <Navbar />
-          <div className='app-wrapper-content'>
-            <Route path='/profile/:userId?' 
-              render={() => <ProfileContainer />} />
-            <Route path='/dialogs' 
-              render={() => <DialogsContainer />} />
-            <Route path='/news' component={News} />
-            <Route path='/music' component={Music} />
-            <Route path='/users' 
-              render={() => <UsersConteiner />} />
-            <Route path='/settings' component={Settings} />
-            <Route path='/login'
-              render={() => <Login />} />
-          </div>
-        </div>
-      </BrowserRouter>
+        <BrowserRouter>
+            <div className='app-wrapper'>
+                <HeaderContainer />
+                <Navbar />
+                <div className='app-wrapper-content'>
+                <Route path='/profile/:userId?' 
+                    render={() => <ProfileContainer />} />
+                <Route path='/dialogs' 
+                    render={() => <DialogsContainer />} />
+                <Route path='/news' component={News} />
+                <Route path='/music' component={Music} />
+                <Route path='/users' 
+                    render={() => <UsersConteiner />} />
+                <Route path='/settings' component={Settings} />
+                <Route path='/login'
+                    render={() => <Login />} />
+                </div>
+            </div>
+        </BrowserRouter>
     )
-  }
+    }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    initialized: state.app.initialized
-  }
+    return {
+        initialized: state.app.initialized
+    }
 }
 
 export default connect(mapStateToProps, {initializedApp})(App)
