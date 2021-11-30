@@ -7,13 +7,10 @@ import { Textarea } from '../../Common/FormControl/FormControl';
 
 const maxLength10 = maxLength(10)
 
-class MyPosts extends React.Component {
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps !== this.props || nextState !== this.state
-    }
+class MyPosts extends React.PureComponent {
 
     render() {
+        console.log('RENDER')
         let myPostsData = this.props.state.profilePage.postsData.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
         const onSubmit = (dataForm) => {
             this.props.addPost(dataForm.post)
