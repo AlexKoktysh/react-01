@@ -6,25 +6,31 @@ import { maxLength, required } from '../../../utils/validatros/validators';
 import { Textarea } from '../../Common/FormControl/FormControl';
 
 const maxLength10 = maxLength(10)
-const MyPosts = (props) => {
-    const onSubmit = (dataForm) => {
-        props.addPost(dataForm.post)
-        console.log(dataForm.post)
+
+class MyPosts extends React.Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps !== this.props || nextState !== this.state
     }
 
-    let myPostsData = props.state.profilePage.postsData.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
-
-    return (
-        <div className={styles.item}>
-            <h3>My post</h3>
-            <div>
-                <MyPostReduxForm onSubmit={onSubmit} />
+    render() {
+        let myPostsData = this.props.state.profilePage.postsData.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
+        const onSubmit = (dataForm) => {
+            this.props.addPost(dataForm.post)
+            console.log(dataForm.post)
+        }
+        return (
+            <div className={styles.item}>
+                <h3>My post</h3>
+                <div>
+                    <MyPostReduxForm onSubmit={onSubmit} />
+                </div>
+                <div className={styles.posts}>
+                    {myPostsData}
+                </div>
             </div>
-            <div className={styles.posts}>
-                {myPostsData}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 const MyPostForm = (props) => {
