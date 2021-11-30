@@ -8,7 +8,6 @@ import { Input } from '../Common/FormControl/FormControl';
 import styles from './../Common/FormControl/FormControl.module.css'
 
 const LoginForm = (props) => {
-    debugger
     return (
         <form onSubmit={props.handleSubmit} >
             <div>

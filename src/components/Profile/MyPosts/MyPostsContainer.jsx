@@ -6,7 +6,8 @@ import { compose } from 'redux';
 
 const mapStateToProps = (state) => {
     return {
-        state: state
+        posts: state.profilePage.postsData
+        // state: state.profilePage
     }
 }
 

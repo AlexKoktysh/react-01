@@ -7,30 +7,7 @@ import { Textarea } from '../../Common/FormControl/FormControl';
 
 const maxLength10 = maxLength(10)
 
-class MyPosts extends React.PureComponent {
-
-    render() {
-        console.log('RENDER')
-        let myPostsData = this.props.state.profilePage.postsData.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
-        const onSubmit = (dataForm) => {
-            this.props.addPost(dataForm.post)
-            console.log(dataForm.post)
-        }
-        return (
-            <div className={styles.item}>
-                <h3>My post</h3>
-                <div>
-                    <MyPostReduxForm onSubmit={onSubmit} />
-                </div>
-                <div className={styles.posts}>
-                    {myPostsData}
-                </div>
-            </div>
-        );
-    }
-}
-
-const MyPostForm = (props) => {
+const MyPostForm = React.memo(props => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -41,8 +18,28 @@ const MyPostForm = (props) => {
             </div>
         </form>
     )
-}
+})
 
 const MyPostReduxForm = reduxForm({form: 'post'})(MyPostForm)
+
+const MyPosts = (props) => {
+    console.log('RENDER')
+    let myPostsData = props.posts.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
+    const onSubmit = (dataForm) => {
+        props.addPost(dataForm.post)
+        console.log(dataForm.post)
+    }
+    return (
+        <div className={styles.item}>
+            <h3>My post</h3>
+            <div>
+                <MyPostReduxForm onSubmit={onSubmit} />
+            </div>
+            <div className={styles.posts}>
+                {myPostsData}
+            </div>
+        </div>
+    );
+}
 
 export default MyPosts;
