@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { compose } from 'redux';
 import './App.css';
 import Preloader from './components/Common/Preloader/Preloader';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -13,6 +14,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import Settings from './components/Settings/Settings';
 import UsersConteiner from './components/Users/UsersContainer';
 import { initializedApp } from './redux/app-reducer';
+import { withRouter } from 'react-router';
 
 class App extends React.Component {
   
@@ -25,7 +27,6 @@ render() {
         return <Preloader />
     }
     return (
-        <BrowserRouter>
             <div className='app-wrapper'>
                 <HeaderContainer />
                 <Navbar />
@@ -43,7 +44,6 @@ render() {
                     render={() => <Login />} />
                 </div>
             </div>
-        </BrowserRouter>
     )
     }
 }
@@ -54,4 +54,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {initializedApp})(App)
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {initializedApp}))(App)

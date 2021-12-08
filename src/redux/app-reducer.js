@@ -1,6 +1,6 @@
 import { getMe } from "./auth-reducer"
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
+const INITIALIZED_SUCCESS = 'SAMURAI-NETWORK/APP/INITIALIZED_SUCCESS'
 
 let initialState = {
     initialized: false

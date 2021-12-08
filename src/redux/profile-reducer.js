@@ -1,8 +1,8 @@
 import { userAPI } from "../API/api"
 
-const ADD_POST = 'ADD-POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_STATUS = 'SET_STATUS'
+const ADD_POST = 'SAMURAI-NETWORK/PROFILE/ADD-POST'
+const SET_USER_PROFILE = 'SAMURAI-NETWORK/PROFILE/SET_USER_PROFILE'
+const SET_STATUS = 'SAMURAI-NETWORK/PROFILE/SET_STATUS'
 
 let initialState = {
     postsData: [
@@ -57,32 +57,26 @@ export const setStatus = (status) => {
 }
 
 export const getProfile = (userId) => {
-    return (dispatch) => {
-        userAPI.getUserProfile(userId)
-        .then(data => {
-            dispatch(setUserProfile(data))
-        })
-    }
+    return async (dispatch) => {
+        let response = await userAPI.getUserProfile(userId)
+            dispatch(setUserProfile(response))
+        }
 }
 
 export const getStatus = (userId) => {
-    return (dispatch) => {
-        userAPI.getStatus(userId)
-        .then(data => {
-            dispatch(setStatus(data))
-        })
+    return  async (dispatch) => {
+        let response = await userAPI.getStatus(userId)
+            dispatch(setStatus(response))
     }
 }
 
 export const updateStatus = (status) => {
-    return (dispatch) => {
-        userAPI.updateStatus(status)
-        .then(data => {
-            if (data.resultCode === 0) {
+    return async (dispatch) => {
+        let response = await userAPI.updateStatus(status)
+            if (response.resultCode === 0) {
                 dispatch(setStatus(status))
             }
-        })
-    }
+        }
 }
 
 export default profileReducer;

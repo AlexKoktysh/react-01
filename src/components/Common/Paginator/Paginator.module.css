@@ -1,0 +1,10 @@
+.selectedPage {
+    font-weight: bold;
+}
+
+.page {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    width: 785px;
+}

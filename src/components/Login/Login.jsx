@@ -7,9 +7,9 @@ import { required } from '../../utils/validatros/validators';
 import { Input } from '../Common/FormControl/FormControl';
 import styles from './../Common/FormControl/FormControl.module.css'
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit} >
+        <form onSubmit={handleSubmit} >
             <div>
                 <Field validate={[required]} placeholder={'login'} name={'login'} component={Input} />
             </div>
@@ -19,9 +19,9 @@ const LoginForm = (props) => {
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={Input} />remember me
             </div>
-            {props.error && 
+            {error && 
             <div className={styles.formSummaryError}>
-                {props.error}
+                {error}
             </div>}
             <div>
                 <button>LOGIN</button>
@@ -32,12 +32,12 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
-const Login = (props) => {
+const Login = ({login, isAuth}) => {
     const onSubmit = (dataForm) => {
-        props.login(dataForm.login, dataForm.password, dataForm.rememberMe)
+        login(dataForm.login, dataForm.password, dataForm.rememberMe)
     }
     
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={'/profile'} />
     }
     return (

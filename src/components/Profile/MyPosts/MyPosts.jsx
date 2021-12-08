@@ -27,7 +27,6 @@ const MyPosts = (props) => {
     let myPostsData = props.posts.map(post => <Post message={post.message} likeCounts={post.likeCounts} />)
     const onSubmit = (dataForm) => {
         props.addPost(dataForm.post)
-        console.log(dataForm.post)
     }
     return (
         <div className={styles.item}>
